@@ -1,29 +1,21 @@
-
 function setup() {
-    createCanvas(400, 400);
-  }
+  createCanvas(windowWidth,windowHeight);
+}
+
+function draw() {
+  background(255,239,222);
+  line (windowWidth,0,3,0)
+  line (0,0,0,windowHeight)
   
-  function draw() {
-    background(12);
-  }
+  line (250,200,windowWidth,200)
+  line (250,0,250,400)
+   
+  line (0,400,500,400)
+  line (500,200,500,windowHeight)
   
-  function setup() {
-    createCanvas(windowWidth,windowHeight);
-  }
+  line (windowWidth,0,windowWidth,windowHeight)
+
+  strokeWeight (30)
+  stroke (0)
   
-  function draw() {
-    
-    background(179,197,144);
-    noStroke();
-    stroke(50)
-    strokeWeight (2)
-    for (let i = 0; i < height; i += 20) {
-      fill(255, 203, 164);
-      rect(200, i, width, 20);
-      fill(0);
-      rect(i, 30, height,40);   
-   triangle(240, 300, 345, 300, 340,96) 
-  }
-  
-  }
-  
+}

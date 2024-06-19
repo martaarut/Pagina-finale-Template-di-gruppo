@@ -1,30 +1,27 @@
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  background(0);
-  strokeWeight(2);
-  stroke(0);
-  noLoop();  // Disabilita il ciclo draw per disegnare solo una volta
+  background(160, 82, 45);
+  noLoop();
 }
 
 function draw() {
-  let stepSize = 50;  // Dimensione della griglia
+  let cellSize = 10;
+  strokeWeight(2);
 
-  for (let x = 0; x < width; x += stepSize) {
-    for (let y = 0; y < height; y += stepSize) {
-      let randomChoice = random(2);
-      if (randomChoice < 1) {
-        // Disegna Pac-Man (arco)
-        let startAngle = random([0, HALF_PI, PI, PI + HALF_PI]);
-        fill(255, 255, 0);  // Colore giallo per Pac-Man
-        arc(x + stepSize / 2, y + stepSize / 2, stepSize * 0.8, stepSize * 0.8, startAngle, startAngle + PI + QUARTER_PI, PIE);
-      } else {
-        // Disegna un puntino colorato
-        let r = random(255);
-        let g = random(255);
-        let b = random(255);
-        fill(r, g, b);  // Colore casuale per i puntini
-        ellipse(x + stepSize / 2, y + stepSize / 2, stepSize * 0.2, stepSize * 0.2);
+  for (let y = 0; y < height; y += cellSize) {
+      for (let x = 0; x < width; x += cellSize) {
+          if (random() > 0.5) {
+              stroke(139, 69, 19); // Brown color 1
+              line(x, y, x + cellSize, y + cellSize);
+          } else {
+              stroke(181,101,29); // Brown color 2
+              line(x + cellSize, y, x, y + cellSize);
+          }
       }
-    }
   }
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  draw();
 }

@@ -1,36 +1,24 @@
-let x=0
-let y=0
-let size = 60
+let x, y;
+let size;
 
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  background (203,77,99)
-  
-
+  size =10;
+ 
+  background(255);
 }
 
 function draw() {
-  strokeWeight (40)
-  point (x, y)
- 
-
-  
-  
-  if(random(1) <0.5){
- 
-    
-    line(x,y, x+size,y+size) 
-  } else  {
-     line (x,y+size,x+size,y)
-  };
-  x+= size;
-
-  if (x>width) {
-  x=0
-  y+=size;
-  
+  for (x=size/2; x<windowWidth; x=x+size) {
+    for(y=size/2; y<windowHeight; y=y+size) {
+      ellipse(x, y,size,size);
+      fill(0);
+      
+      
+    }
   }
-  
-  
- }
+      
+      
+
+    }

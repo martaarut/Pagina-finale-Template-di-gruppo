@@ -1,38 +1,50 @@
-let x = 0;
-let y = 0;
-let size = 50; // Define the size of each shape
+let circles = [];
+let loopCounter = 0;
+let maxLoops = 450; // Numero massimo di iterazioni prima di fermare il loop
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
-  background(220); // Set background color
+  createCanvas(600, 600);
+  background(240); // Sfondo grigio chiaro
+  
+
+  for (let i = 0; i < 100; i++) {
+    let grayScale = random(50, 220); // Tonalità di grigio casuale
+    let circle = {
+      x: random(width),
+      y: random(height),
+      diameter: random(10, 30),
+      gray: grayScale,
+      speedX: random(-2, 2),
+      speedY: random(-2, 2)
+    };
+    circles.push(circle);
+  }
 }
 
 function draw() {
-  noStroke(); // No outline for triangles
-  
-  // Random RGB values for fill color
-  let r = random(255);
-  let g = random(255);
-  let b = random(255);
-  fill(r, g, b); // Set fill color
-  
-  // Randomly choose orientation of the triangle
-  if (random(1) < 0.5) {
-    triangle(x, y, x + size, y, x + size / 2, y + size); // Draw triangle pointing upwards
-  } else {
-    triangle(x, y + size, x + size, y + size, x + size / 2, y); // Draw triangle pointing downwards
+  // Disegniamo i cerchi e lasciamo una scia di colore dietro di loro
+  for (let i = 0; i < circles.length; i++) {
+    let circle = circles[i];
+    
+    // Disegna il cerchio con il colore grigio
+    fill(circle.gray);
+    noStroke();
+    ellipse(circle.x, circle.y, circle.diameter);
+    
+    // Aggiorna la posizione del cerchio in base alla velocità
+    circle.x += circle.speedX;
+    circle.y += circle.speedY;
+    
+    // Limita la posizione del cerchio all'interno del canvas
+    circle.x = constrain(circle.x, 0, width);
+    circle.y = constrain(circle.y, 0, height);
   }
   
-  x += size; // Move x position to the right
+  // Incrementa il contatore di loop
+  loopCounter++;
   
-  // Check if x has reached the right edge of the canvas
-  if (x > width - size) {
-    x = 0; // Reset x to start from the left
-    y += size; // Move y position down
-  }
-  
-  // Check if y has reached the bottom of the canvas
-  if (y > height - size) {
-    noLoop(); // Stop the draw loop once the canvas is filled
+  // Se il contatore di loop raggiunge il numero massimo, ferma il loop
+  if (loopCounter >= maxLoops) {
+    noLoop();
   }
 }

@@ -1,25 +1,22 @@
-let x = 0;
-let y = 0;
-let spacing = 30;
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  background(120, 60, 125);
+  background(200); // Sfondo grigio
+  stroke(0); // Colore delle linee nero
+  strokeWeight(2); // Spessore delle linee
+  
+  let numLines = 60; // Numero di linee
+  let lineWidth = width / numLines; // Larghezza delle colonne
+  
+  for (let i = 0; i < numLines; i++) {
+    let x = i * lineWidth + lineWidth / 2;
+    let startY = 10; // Y iniziale
+    let endY = startY + random(200, 500); // Y finale casuale
+    
+    line(x, startY, x, endY);
+  }
 }
 
 function draw() {
-  if (random(10) < 1) {
-    line(x, y, x + 10, y + spacing);
-  } else {
-    line(x, y + spacing, x + spacing, y);
-    line(x, y, x + spacing, y);
-    line(x + spacing, y, x, y);
-  }
-
-  x = x + spacing;
-
-  if (x > width) {
-    x = 0;
-    y = y + spacing;
-  }
+  // Nessuna necessità di disegnare continuamente
+  noLoop();
 }

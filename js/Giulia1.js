@@ -1,22 +1,26 @@
 function setup() {
-  createCanvas(600, 600);
-  background(200); // Sfondo grigio
-  stroke(0); // Colore delle linee nero
-  strokeWeight(2); // Spessore delle linee
-  
-  let numLines = 60; // Numero di linee
-  let lineWidth = width / numLines; // Larghezza delle colonne
-  
-  for (let i = 0; i < numLines; i++) {
-    let x = i * lineWidth + lineWidth / 2;
-    let startY = 10; // Y iniziale
-    let endY = startY + random(200, 500); // Y finale casuale
-    
-    line(x, startY, x, endY);
-  }
+  createCanvas(windowWidth, windowHeight);
+  noLoop();
 }
 
 function draw() {
-  // Nessuna necessità di disegnare continuamente
-  noLoop();
+  background(255); // Sfondo bianco
+  
+  let colors = [50, 150, 200]; // Scala di grigi
+  let gridSize = 24; // Dimensione della griglia
+
+  for (let y = 0; y < height; y += gridSize) {
+    for (let x = 0; x < width; x += gridSize) {
+      // Calcola la dimensione del quadrato basata sulla posizione
+      let d = dist(x, y, width / 2, height / 2);
+      let size = map(d, 3, dist(0, 0, width / 2, height / 2), gridSize, gridSize / 3);
+
+      // Seleziona un colore casuale dalla scala di grigi
+      let c = random(colors);
+      fill(c);
+      noStroke();
+      
+      rect(x, y, size, size);
+    }
+  }
 }
